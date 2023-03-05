@@ -1,6 +1,6 @@
 # Tetrecs
 ## About
-A small project based off the hit game Tetris. In this version, the player places blocks onto 5 by 5 grid, trying to fill columns or rows to gain points. For each successive column or row clear a multiplier increases the points gained for each subsequent clear. Furthermore, with enough points, the player can purchase power ups including a nuke (clears the entire board), a 15x multiplier and a one UP. 
+A small project based off the hit game Tetris. In this version, the player places blocks onto a 5 by 5 grid, trying to fill columns or rows to gain points. For each successive column or row clear a multiplier increases the points gained for each subsequent clear. Furthermore, with enough points, the player can purchase power ups including a nuke (clears the entire board), a 15x multiplier and a one UP. 
 
 In addition, the game contains a musicplayer and a folder is created allowing players to play their own music and skip, forward or even pause the current track playing.
 
