@@ -10,4 +10,4 @@ A short, fun game based off the hit game, Tetris.
 1. In cmd or terminal, navigate to the root directory of Tetrecs, containing file Pom.xml
 2. Run command,
 
-```'mvn javafx:run'```
+  ```'mvn javafx:run'```
