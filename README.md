@@ -2,4 +2,11 @@
 ## About
 A short, fun game based off the hit game, Tetris.
 
-Requires apache maven version 3.2.4 at least. Run command "mvn javafx:run" in cmd or terminal to start the game. Instructions on how to play are contained within the main menu.
+## Requirements
+JDK 17+
+Maven 3.2+
+
+## How to Run
+- In cmd or terminal, navigate to the root directory of Tetrecs, containing file Pom.xml
+- Run command:
+'mvn javafx:run'
