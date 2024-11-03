@@ -5,13 +5,14 @@ module uk.ac.soton.comp1206 {
     requires javafx.media;
     requires org.apache.logging.log4j;
     requires nv.websocket.client;
-    opens uk.ac.soton.comp1206.ui to javafx.fxml;
-    exports uk.ac.soton.comp1206;
-    exports uk.ac.soton.comp1206.ui;
-    exports uk.ac.soton.comp1206.network;
-    exports uk.ac.soton.comp1206.scene;
-    exports uk.ac.soton.comp1206.event;
-    exports uk.ac.soton.comp1206.component;
-    exports uk.ac.soton.comp1206.game;
-  opens uk.ac.soton.comp1206.scene to javafx.fxml;
+    requires java.sql;
+    opens tetrecs.ui to javafx.fxml;
+    exports tetrecs.ui;
+    exports tetrecs.network;
+    exports tetrecs.scene;
+    exports tetrecs.event;
+    exports tetrecs.component;
+    exports tetrecs.game;
+  opens tetrecs.scene to javafx.fxml;
+    exports tetrecs;
 }
