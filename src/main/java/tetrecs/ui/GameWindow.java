@@ -79,7 +79,7 @@ public class GameWindow {
 
         //Setup communicator
         try {
-            WebSocketClient communicator = new Communicator(new URI("ws://0.0.0.0:9070"));
+            WebSocketClient communicator = new Communicator(new URI("ws://192.168.1.104:8887"));
             communicator.connect();
         } catch (URISyntaxException e) {
             e.printStackTrace();

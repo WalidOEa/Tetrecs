@@ -64,7 +64,7 @@ public class MultiplayerGame extends Game {
 
         this.communicator = communicator;
 
-        this.communicator.addListener(this::receiveMessage);
+        //this.communicator.addListener(this::receiveMessage);
     }
 
     /**

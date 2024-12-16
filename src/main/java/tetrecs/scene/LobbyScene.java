@@ -147,7 +147,7 @@ public class LobbyScene extends BaseScene {
         lobbyPane.getStyleClass().add("menu-background");
         root.getChildren().add(lobbyPane);
 
-        communicator.addListener((message) -> Platform.runLater(() -> receiveMessage(message)));
+        //communicator.addListener((message) -> Platform.runLater(() -> receiveMessage(message)));
 
         var wrapper = new StackPane();
 

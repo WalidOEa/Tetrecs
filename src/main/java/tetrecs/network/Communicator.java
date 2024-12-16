@@ -63,11 +63,6 @@ public class Communicator extends WebSocketClient {
     }
 
 
-
-
-
-
-
     /*
 
     /**
@@ -151,16 +146,16 @@ public class Communicator extends WebSocketClient {
      * Add a new listener to receive messages from the server
      * @param listener the listener to add
      */
-    public void addListener(CommunicationsListener listener) {
-        this.handlers.add(listener);
-    }
+    //public void addListener(CommunicationsListener listener) {
+    //    this.handlers.add(listener);
+    //}
 
     /**
      * Clear all current listeners
      */
-    public void clearListeners() {
-        this.handlers.clear();
-    }
+    //public void clearListeners() {
+    //    this.handlers.clear();
+    //}
 
     /*
     /** Receive a message from the server. Relay to any attached listeners

@@ -127,9 +127,9 @@ public class MultiplayerScene extends ChallengeScene {
 
         setupGame();
 
-        communicator.addListener((message) ->
-                Platform.runLater(() -> receiveMessage(message))
-        );
+        //communicator.addListener((message) ->
+        //        Platform.runLater(() -> receiveMessage(message))
+        //);
 
         root = new GamePane(gameWindow.getWidth(),gameWindow.getHeight());
 
