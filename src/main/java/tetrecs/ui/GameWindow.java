@@ -2,6 +2,7 @@ package tetrecs.ui;
 
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -56,6 +57,8 @@ public class GameWindow {
 
     final Communicator communicator = null;
 
+    private static URI serverURI;
+
     /**
      * Create a new GameWindow attached to the given stage with the specified width and height
      * @param stage stage
@@ -79,10 +82,16 @@ public class GameWindow {
 
         //Setup communicator
         try {
-            WebSocketClient communicator = new Communicator(new URI("ws://192.168.1.104:8887"));
+            serverURI = new URI("ws://192.168.1.104:8887");
+
+            WebSocketClient communicator = new Communicator(serverURI);
             communicator.connect();
         } catch (URISyntaxException e) {
-            e.printStackTrace();
+            logger.error("Socket error: " + e.getMessage());
+
+            Alert error = new Alert(Alert.AlertType.ERROR,"Unable to communicate with the server\n\n" + e.getMessage());
+            error.showAndWait();
+            System.exit(1);
         }
 
         startIntro();
@@ -218,4 +227,6 @@ public class GameWindow {
     public int getHeight() {
         return this.height;
     }
+
+    public static URI getServerURI() { return serverURI; }
 }
