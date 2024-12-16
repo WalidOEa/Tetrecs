@@ -8,10 +8,14 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.java_websocket.client.WebSocketClient;
 import tetrecs.App;
 import tetrecs.game.Game;
 import tetrecs.network.Communicator;
 import tetrecs.scene.*;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 import static tetrecs.scene.Multimedia.musicCleanUp;
 
@@ -50,7 +54,7 @@ public class GameWindow {
      */
     private Scene scene;
 
-    final Communicator communicator;
+    final Communicator communicator = null;
 
     /**
      * Create a new GameWindow attached to the given stage with the specified width and height
@@ -74,7 +78,12 @@ public class GameWindow {
         setupDefaultScene();
 
         //Setup communicator
-        communicator = new Communicator("ws://192.168.1.104:9070");
+        try {
+            WebSocketClient communicator = new Communicator(new URI("ws://0.0.0.0:9070"));
+            communicator.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
 
         startIntro();
     }
@@ -176,7 +185,7 @@ public class GameWindow {
         logger.info("Clearing up previous scene");
 
         logger.info("Removing listeners");
-        communicator.clearListeners();
+        //communicator.clearListeners();
 
         try {
             logger.info("Stopping music");

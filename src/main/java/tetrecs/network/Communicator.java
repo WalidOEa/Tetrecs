@@ -1,18 +1,24 @@
 package tetrecs.network;
 
-import com.neovisionaries.ws.client.*;
 import javafx.scene.control.Alert;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tetrecs.event.CommunicationsListener;
 
+import java.net.URI;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.java_websocket.client.WebSocketClient;
+import org.java_websocket.drafts.Draft;
+import org.java_websocket.drafts.Draft_6455;
+import org.java_websocket.handshake.ServerHandshake;
 
 /**
  * Uses web sockets to talk to a web socket server and relays communication to attached listeners
  */
-public class Communicator {
+public class Communicator extends WebSocketClient {
 
     private static final Logger logger = LogManager.getLogger(Communicator.class);
 
@@ -21,15 +27,60 @@ public class Communicator {
      */
     private final List<CommunicationsListener> handlers = new ArrayList<>();
 
+    public Communicator(URI serverURI, Draft draft) {
+        super(serverURI, draft);
+    }
+
+    public Communicator(URI serverURI) {
+        super(serverURI);
+    }
+
+
+    @Override
+    public void onOpen(ServerHandshake handshakedata) {
+        send("Hello, it is me. Mario :)");
+        System.out.println("new connection opened");
+    }
+
+    @Override
+    public void onClose(int code, String reason, boolean remote) {
+        System.out.println("closed with exit code " + code + " additional info: " + reason);
+    }
+
+    @Override
+    public void onMessage(String message) {
+        System.out.println("received message: " + message);
+    }
+
+    @Override
+    public void onMessage(ByteBuffer message) {
+        System.out.println("received ByteBuffer");
+    }
+
+    @Override
+    public void onError(Exception ex) {
+        System.err.println("an error occurred:" + ex);
+    }
+
+
+
+
+
+
+
+    /*
+
     /**
      * Web socket server to connect to and receive and send messages to.
      */
+    /*
     private WebSocket ws = null;
 
     /**
      * Create a new communicator to the given web socket server
      * @param server server to connect to
      */
+    /*
     public Communicator(String server) {
 
         try {
@@ -72,7 +123,6 @@ public class Communicator {
                     e.printStackTrace();
                 }
             });
-            */
 
         } catch (Exception e){
             logger.error("Socket error: " + e.getMessage());
@@ -84,15 +134,18 @@ public class Communicator {
         }
     }
 
+
     /**
      * Send a message to the server
      * @param message Message to send
      */
+    /*
     public void send(String message) {
         logger.info("Sending message: " + message);
 
         ws.sendText(message);
     }
+
 
     /**
      * Add a new listener to receive messages from the server
@@ -109,11 +162,13 @@ public class Communicator {
         this.handlers.clear();
     }
 
+    /*
     /** Receive a message from the server. Relay to any attached listeners
      *
      * @param websocket the socket
      * @param message the message that was received
      */
+    /*
     private void receive(WebSocket websocket, String message) {
         logger.info("Received, {}", message);
 
@@ -121,5 +176,7 @@ public class Communicator {
             handler.receiveCommunication(message);
         }
     }
+
+    */
 
 }
