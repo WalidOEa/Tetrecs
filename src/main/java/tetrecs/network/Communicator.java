@@ -1,6 +1,7 @@
 package tetrecs.network;
 
 import com.neovisionaries.ws.client.*;
+import javafx.scene.control.Alert;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import tetrecs.event.CommunicationsListener;
@@ -11,7 +12,6 @@ import java.util.List;
 /**
  * Uses web sockets to talk to a web socket server and relays communication to attached listeners
  */
-@Deprecated
 public class Communicator {
 
     private static final Logger logger = LogManager.getLogger(Communicator.class);
@@ -32,7 +32,6 @@ public class Communicator {
      */
     public Communicator(String server) {
 
-        /*
         try {
             var socketFactory = new WebSocketFactory();
 
@@ -41,6 +40,7 @@ public class Communicator {
             ws.connect();
             logger.info("Connected to " + server);
 
+            /*
             // When a message is received, call the receive method
             ws.addListener(new WebSocketAdapter() {
                 @Override
@@ -72,6 +72,7 @@ public class Communicator {
                     e.printStackTrace();
                 }
             });
+            */
 
         } catch (Exception e){
             logger.error("Socket error: " + e.getMessage());
@@ -81,23 +82,17 @@ public class Communicator {
             error.showAndWait();
             System.exit(1);
         }
-
-         */
     }
 
-    /*
     /**
      * Send a message to the server
      * @param message Message to send
      */
-    /*
     public void send(String message) {
         logger.info("Sending message: " + message);
 
         ws.sendText(message);
     }
-
-     */
 
     /**
      * Add a new listener to receive messages from the server

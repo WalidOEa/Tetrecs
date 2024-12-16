@@ -95,7 +95,6 @@ public class MenuScene extends BaseScene {
         });
         sceneButtons.getChildren().add(singlePlayer);
 
-        /*
         // Multiplayer
         var multiPlayer = new Text("Multiplayer");
         multiPlayer.getStyleClass().add("menuItem");
@@ -106,8 +105,6 @@ public class MenuScene extends BaseScene {
             }
         });
         sceneButtons.getChildren().add(multiPlayer);
-
-         */
 
         // Help
         var help = new Text("How to play");

@@ -39,7 +39,6 @@ import java.util.concurrent.ScheduledExecutorService;
 /**
  * Responsible for managing and creating lobbies in the server as well as displaying all possible games.
  */
-@Deprecated
 public class LobbyScene extends BaseScene {
 
     private final Logger logger = LogManager.getLogger(LobbyScene.class);

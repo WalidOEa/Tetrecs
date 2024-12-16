@@ -4,8 +4,8 @@ module uk.ac.soton.comp1206 {
     requires javafx.fxml;
     requires javafx.media;
     requires org.apache.logging.log4j;
-    requires nv.websocket.client;
     requires java.sql;
+    requires nv.websocket.client;
     opens tetrecs.ui to javafx.fxml;
     exports tetrecs.ui;
     exports tetrecs.network;

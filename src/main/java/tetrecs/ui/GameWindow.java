@@ -74,7 +74,7 @@ public class GameWindow {
         setupDefaultScene();
 
         //Setup communicator
-        communicator = new Communicator("ws://localhost:9700");
+        communicator = new Communicator("ws://192.168.1.104:9070");
 
         startIntro();
     }
