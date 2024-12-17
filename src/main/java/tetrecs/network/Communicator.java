@@ -68,7 +68,7 @@ public class Communicator extends WebSocketClient {
         logger.error("An error has occurred: " + e.getMessage());
     }
 
-    /*
+
 
     /**
      * Web socket server to connect to and receive and send messages to.
