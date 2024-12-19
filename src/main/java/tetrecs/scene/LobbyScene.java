@@ -35,6 +35,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Responsible for managing and creating lobbies in the server as well as displaying all possible games.
@@ -147,7 +148,7 @@ public class LobbyScene extends BaseScene {
         lobbyPane.getStyleClass().add("menu-background");
         root.getChildren().add(lobbyPane);
 
-        //communicator.addListener((message) -> Platform.runLater(() -> receiveMessage(message)));
+        communicator.addListener((message) -> Platform.runLater(() -> receiveMessage(message)));
 
         var wrapper = new StackPane();
 
@@ -187,7 +188,7 @@ public class LobbyScene extends BaseScene {
         channelField.setOnKeyPressed((event) -> {
             if (event.getCode() == KeyCode.ENTER) {
                 channelField.setVisible(false);
-                //communicator.send("CREATE " + channelField.getText());
+                communicator.send("CREATE " + channelField.getText());
                 startGame.setVisible(true);
                 channelField.clear();
                 Multimedia.playSound("pling.wav");
@@ -275,11 +276,11 @@ public class LobbyScene extends BaseScene {
                     return;
                 }
                 if (sendMessage.getText().contains("/nick")) {
-                    //communicator.send("NICK " + sendMessage.getText().replace("/nick ", ""));
+                    communicator.send("NICK " + sendMessage.getText().replace("/nick ", ""));
                     sendMessage.clear();
                     Multimedia.playSound("message.wav");
                 } else {
-                    //communicator.send("MSG " + sendMessage.getText());
+                    communicator.send("MSG " + sendMessage.getText());
                     sendMessage.clear();
                     Multimedia.playSound("message.wav");
                 }
@@ -288,7 +289,7 @@ public class LobbyScene extends BaseScene {
 
         startGame.setOnMouseClicked((event) -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                //communicator.send("START");
+                communicator.send("START");
                 scheduledExecutorService.shutdown();
                 gameWindow.cleanup();
                 gameWindow.startMultiplayer();
@@ -298,7 +299,7 @@ public class LobbyScene extends BaseScene {
 
         leaveLobby.setOnMouseClicked((event) -> {
             if (event.getButton() == MouseButton.PRIMARY) {
-                //communicator.send("PART");
+                communicator.send("PART");
                 chatRoomStack.setVisible(false);
                 startGame.setVisible(false);
                 Multimedia.playSound("pling.wav");
@@ -310,11 +311,11 @@ public class LobbyScene extends BaseScene {
                 return;
             }
             if (sendMessage.getText().equals("/nick")) {
-                //communicator.send("NICK " + sendMessage.getText().replace("/nick ", ""));
+                communicator.send("NICK " + sendMessage.getText().replace("/nick ", ""));
                 sendMessage.clear();
                 Multimedia.playSound("message.wav");
             } else {
-                //communicator.send("MSG " + sendMessage.getText());
+                communicator.send("MSG " + sendMessage.getText());
                 sendMessage.clear();
                 Multimedia.playSound("message.wav");
             }
@@ -327,9 +328,9 @@ public class LobbyScene extends BaseScene {
      */
     @Override
     public void initialise() {
-        //Runnable runnable = () -> communicator.send("LIST");
+        Runnable runnable = () -> communicator.send("LIST");
 
-        //scheduledExecutorService.scheduleAtFixedRate(runnable, 0, 2000, TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(runnable, 0, 2000, TimeUnit.MILLISECONDS);
 
         //TODO: Send PART message to server when escape is pressed
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
@@ -381,7 +382,7 @@ public class LobbyScene extends BaseScene {
             chatRoomStack.setVisible(true);
             channelTitleProperty.set(message.replace("JOIN ", ""));
 
-            //communicator.send("USERS");
+            communicator.send("USERS");
         }
 
         if (message.startsWith("NICK")) {
@@ -424,7 +425,7 @@ public class LobbyScene extends BaseScene {
 
         if (message.startsWith("START")) {
             // Start multiplayer game and shutdown scheduler to prevent further polling
-            //communicator.send("START");
+            communicator.send("START");
             scheduledExecutorService.shutdown();
             gameWindow.cleanup();
             gameWindow.startMultiplayer();
@@ -448,7 +449,7 @@ public class LobbyScene extends BaseScene {
      */
     private void joinChannel(MouseEvent mouseEvent, String channel) {
         if (mouseEvent.getButton() == MouseButton.PRIMARY) {
-            //communicator.send("JOIN " + channel);
+            communicator.send("JOIN " + channel);
         }
     }
 

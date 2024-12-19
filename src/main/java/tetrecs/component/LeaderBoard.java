@@ -11,7 +11,6 @@ import java.util.Random;
  * Custom UI component that lays out text containing name and score vertically. Used in displaying scores against
  * other competing players.
  */
-@Deprecated
 public class LeaderBoard extends ScoresList {
 
     Random rand = new Random();

@@ -55,7 +55,7 @@ public class GameWindow {
      */
     private Scene scene;
 
-    final Communicator communicator = null;
+    private Communicator communicator;
 
     private static URI serverURI;
 
@@ -71,20 +71,11 @@ public class GameWindow {
 
         this.stage = stage;
 
-        //Setup window
-        setupStage();
-
-        //Setup resources
-        setupResources();
-
-        //Setup default scene
-        setupDefaultScene();
-
         //Setup communicator
         try {
             serverURI = new URI("ws://192.168.1.104:8887");
 
-            WebSocketClient communicator = new Communicator(serverURI);
+            communicator = new Communicator(serverURI);
             communicator.connect();
         } catch (URISyntaxException e) {
             logger.error("Socket error: " + e.getMessage());
@@ -93,6 +84,15 @@ public class GameWindow {
             error.showAndWait();
             System.exit(1);
         }
+
+        //Setup window
+        setupStage();
+
+        //Setup resources
+        setupResources();
+
+        //Setup default scene
+        setupDefaultScene();
 
         startIntro();
     }
@@ -194,7 +194,7 @@ public class GameWindow {
         logger.info("Clearing up previous scene");
 
         logger.info("Removing listeners");
-        //communicator.clearListeners();
+        communicator.clearListeners();
 
         try {
             logger.info("Stopping music");

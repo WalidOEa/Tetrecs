@@ -2,6 +2,7 @@ package tetrecs.scene;
 
 import javafx.animation.Animation;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,6 +27,7 @@ import java.sql.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import tetrecs.component.GameBlock;
 import tetrecs.component.ScoresList;
 import tetrecs.game.Game;
 import tetrecs.network.Communicator;
@@ -34,6 +36,7 @@ import tetrecs.ui.GameWindow;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Contains local scores received from the final Game state and animates the reveal.
@@ -136,7 +139,7 @@ public class ScoresScene extends BaseScene{
 
         root = new GamePane(gameWindow.getWidth(),gameWindow.getHeight());
 
-        //communicator.addListener((message) -> Platform.runLater(() -> this.receiveMessage(message)));
+        communicator.addListener((message) -> Platform.runLater(() -> this.receiveMessage(message)));
 
         var scorePane = new StackPane();
         scorePane.setMaxWidth(gameWindow.getWidth());
@@ -387,13 +390,11 @@ public class ScoresScene extends BaseScene{
         }
     }
 
-    /*
     /**
      * Handle receive messages from server.
      * @param message message to process
      */
 
-    /*
     private void receiveMessage(String message) {
         if (message.startsWith("HISCORES")) {
             String[] components = message.replace("HISCORES ", "").split("\n");
@@ -448,21 +449,18 @@ public class ScoresScene extends BaseScene{
         }
     }
 
-     */
-
-
     /**
      * Sends message to server and receives online scores.
      */
     public void loadOnlineScores() {
-        //communicator.send("HISCORES");
+        communicator.send("HISCORES");
     }
 
     /**
      * Sends message to server and updates remote scores with new score.
      */
     public void writeOnlineScores() {
-        //communicator.send("HISCORE " + nameProperty.get() + ":" + game.getScore());
+        communicator.send("HISCORE " + nameProperty.get() + ":" + game.getScore());
     }
 
     /**
@@ -520,6 +518,6 @@ public class ScoresScene extends BaseScene{
         Multimedia.playBackgroundMusic("end.wav");
 
         // Leave the channel
-        //communicator.send("DIE");
+        communicator.send("DIE");
     }
 }

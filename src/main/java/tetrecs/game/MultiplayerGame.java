@@ -24,7 +24,6 @@ import static tetrecs.game.GamePiece.createPiece;
  * The MultiplayerGame class is responsible for handling logic pertaining to the multiplayer. Unlike Game, MultiplayerGame
  * communicates to web socket server to generate new pieces, update scores, lives, messages and board statuses.
  */
-@Deprecated
 public class MultiplayerGame extends Game {
 
     private final Logger logger = LogManager.getLogger(MultiplayerGame.class);
@@ -64,7 +63,7 @@ public class MultiplayerGame extends Game {
 
         this.communicator = communicator;
 
-        //this.communicator.addListener(this::receiveMessage);
+        this.communicator.addListener(this::receiveMessage);
     }
 
     /**
@@ -172,7 +171,7 @@ public class MultiplayerGame extends Game {
                 blockValues.append(i).append(" ");
             }
 
-            //communicator.send("BOARD " + blockValues);
+            communicator.send("BOARD " + blockValues);
         } else {
             Multimedia.playSound("fail.wav");
         }
@@ -225,7 +224,7 @@ public class MultiplayerGame extends Game {
      */
     private void receivePiece() {
         logger.info("Sending PIECE message");
-        //communicator.send("PIECE");
+        communicator.send("PIECE");
     }
 
     /**
@@ -233,7 +232,7 @@ public class MultiplayerGame extends Game {
      */
     private void sendLives() {
         logger.info("Sending LIVES message");
-        //communicator.send("LIVES " + lives.get());
+        communicator.send("LIVES " + lives.get());
     }
 
     // Listeners

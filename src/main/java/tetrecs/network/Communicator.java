@@ -121,17 +121,7 @@ public class Communicator extends WebSocketClient {
     }
 
 
-    /**
-     * Send a message to the server
-     * @param message Message to send
      */
-    /*
-    public void send(String message) {
-        logger.info("Sending message: " + message);
-
-        ws.sendText(message);
-    }
-
     /**
      * Add a new listener to receive messages from the server
      * @param listener the listener to add

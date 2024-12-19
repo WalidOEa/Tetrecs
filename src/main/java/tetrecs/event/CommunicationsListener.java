@@ -3,7 +3,6 @@ package tetrecs.event;
 /**
  * The Communications Listener is used for listening to messages received by the communicator.
  */
-@Deprecated
 public interface CommunicationsListener {
 
     /**

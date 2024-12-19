@@ -33,14 +33,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * MultiplayerScene is responsible for constructing the UI and handling events pertaining to the multiplayer mode of TetrECS.
  */
-@Deprecated
 public class MultiplayerScene extends ChallengeScene {
-
-    //TODO: Reintegrate multiplayer component
 
     private final Logger logger = LogManager.getLogger(MultiplayerScene.class);
 
@@ -127,9 +125,9 @@ public class MultiplayerScene extends ChallengeScene {
 
         setupGame();
 
-        //communicator.addListener((message) ->
-        //        Platform.runLater(() -> receiveMessage(message))
-        //);
+        communicator.addListener((message) ->
+                Platform.runLater(() -> receiveMessage(message))
+        );
 
         root = new GamePane(gameWindow.getWidth(),gameWindow.getHeight());
 
@@ -377,14 +375,11 @@ public class MultiplayerScene extends ChallengeScene {
 
         this.scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> sendMessage.setVisible(key.getCode() == KeyCode.T));
 
-        /*
         Runnable runnable = () -> {
             communicator.send("SCORES");
             communicator.send("BOARD");
             communicator.send("SCORE " + game.getScore());
         };
-
-         */
 
         game.gameOverProperty().addListener((observable -> {
             if (game.gameOverProperty().get()) {
@@ -395,14 +390,13 @@ public class MultiplayerScene extends ChallengeScene {
             }
         }));
 
-        //scheduledExecutorService.scheduleAtFixedRate(runnable, 0, 1000, TimeUnit.MILLISECONDS);
+        scheduledExecutorService.scheduleAtFixedRate(runnable, 0, 1000, TimeUnit.MILLISECONDS);
 
         logger.info("Initial aim is, x: {}, y: {}", board.getAimX(), board.getAimY());
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             logger.info("Pressed, {}", key.getCode());
 
-            /*
             // Exit
             if (key.getCode() == KeyCode.ESCAPE) {
                 game.resetState();
@@ -412,7 +406,6 @@ public class MultiplayerScene extends ChallengeScene {
                 gameWindow.startMenu();
             }
 
-             */
             // Rotations
             if (key.getCode() == KeyCode.Q) {
                 rotateClockwise();

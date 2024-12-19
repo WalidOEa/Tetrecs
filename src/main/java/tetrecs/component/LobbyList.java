@@ -13,7 +13,6 @@ import java.util.Map;
  * Custom UI component that receives current channels within the server and creates text label reflecting the name and binds
  * an event handler to each.
  */
-@Deprecated
 public class LobbyList extends VBox {
 
     /**
