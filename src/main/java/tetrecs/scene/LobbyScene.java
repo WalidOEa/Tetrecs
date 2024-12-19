@@ -378,7 +378,7 @@ public class LobbyScene extends BaseScene {
         }
 
         if (message.startsWith("JOIN")) {
-            // Send join message to server to join a server
+            // Send join message to server to join a channel
             chatRoomStack.setVisible(true);
             channelTitleProperty.set(message.replace("JOIN ", ""));
 

@@ -68,9 +68,16 @@ public class Communicator extends WebSocketClient {
         logger.info("Closed with Exit Code: " + code + ", Reason: " + reason);
     }
 
+    /** Receive a message from the server. Relay to any attached listeners
+     * @param message the message that was received
+     */
     @Override
     public void onMessage(String message) {
         logger.info("Message received -> " + message);
+
+        for(CommunicationsListener handler : handlers) {
+            handler.receiveCommunication(message);
+        }
     }
 
     @Override
@@ -135,16 +142,5 @@ public class Communicator extends WebSocketClient {
      */
     public void clearListeners() {
         this.handlers.clear();
-    }
-
-    /** Receive a message from the server. Relay to any attached listeners
-     * @param message the message that was received
-     */
-    private void receive(String message) {
-        logger.info("Received, {}", message);
-
-        for(CommunicationsListener handler : handlers) {
-            handler.receiveCommunication(message);
-        }
     }
 }
