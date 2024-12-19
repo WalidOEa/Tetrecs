@@ -8,6 +8,9 @@ import java.net.URI;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.drafts.Draft;
@@ -20,6 +23,8 @@ import tetrecs.ui.GameWindow;
 public class Communicator extends WebSocketClient {
 
     private static final Logger logger = LogManager.getLogger(Communicator.class);
+
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
 
     /**
      * Attached communication listeners listening to messages on this Communicator. Each will be sent any messages.
@@ -46,6 +51,16 @@ public class Communicator extends WebSocketClient {
     @Override
     public void onOpen(ServerHandshake handshake) {
         logger.info("New connection opened to " + GameWindow.getServerURI());
+
+        scheduler.scheduleAtFixedRate(() -> {
+            if (this.isOpen()) {
+                sendMessage("Marco");
+            } else {
+                logger.warn("Connection closed, terminating keep-alive");
+
+                scheduler.shutdown();
+            }
+        }, 0, 2, TimeUnit.MINUTES);
     }
 
     @Override
@@ -55,12 +70,12 @@ public class Communicator extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        logger.info("Received message: " + message);
+        logger.info("Message received -> " + message);
     }
 
     @Override
     public void onMessage(ByteBuffer message) {
-        logger.info("Received message: " + message);
+        logger.info("Message received -> " + message);
     }
 
     @Override
@@ -68,7 +83,11 @@ public class Communicator extends WebSocketClient {
         logger.error("An error has occurred: " + e.getMessage());
     }
 
+    public void sendMessage(String message) {
+        logger.info("Sending message -> " + message);
 
+        this.send(message);
+    }
 
     /**
      * Web socket server to connect to and receive and send messages to.
