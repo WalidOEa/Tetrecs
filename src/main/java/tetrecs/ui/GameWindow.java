@@ -73,7 +73,7 @@ public class GameWindow {
 
         //Setup communicator
         try {
-            serverURI = new URI("ws://192.168.1.104:8887");
+            serverURI = new URI("ws://192.168.1.115:8887");
 
             communicator = new Communicator(serverURI);
             communicator.connect();

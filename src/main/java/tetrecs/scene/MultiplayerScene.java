@@ -344,7 +344,6 @@ public class MultiplayerScene extends ChallengeScene {
 
         nextPieceBoard.setOnLeftClick(this::swapTiles);
 
-        /*
         // Chat room event handler
         sendMessage.setOnKeyPressed((event) -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -359,8 +358,6 @@ public class MultiplayerScene extends ChallengeScene {
                 }
             }
         });
-
-         */
     }
 
     /**
