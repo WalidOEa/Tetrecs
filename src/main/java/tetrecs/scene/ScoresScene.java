@@ -360,10 +360,10 @@ public class ScoresScene extends BaseScene{
     }
 
     /**
-     * If file does not exist, create a new file and populate with.
+     * If database does not exist, create a new database and populate.
      */
     public void createScores() {
-        logger.info("Creating new file");
+        logger.info("Creating new database");
 
         String sql = "INSERT INTO scores(name, score) VALUES(?, ?)";
 
@@ -416,7 +416,7 @@ public class ScoresScene extends BaseScene{
             try {
                 localScores.setText("");
                 localScores = null;
-            } catch (NullPointerException ignored) {
+            } catch (NullPointerException ignored) { //TODO: Not good
 
             }
 
