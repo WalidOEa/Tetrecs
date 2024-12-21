@@ -167,11 +167,11 @@ public class MultiplayerGame extends Game {
                 }
             }
 
-            for (Integer i : blocks) {
-                blockValues.append(i).append(" ");
-            }
+            //for (Integer i : blocks) {
+            //    blockValues.append(i).append(" ");
+            //}
 
-            communicator.send("BOARD " + blockValues);
+            //communicator.send("BOARD " + blockValues);
         } else {
             Multimedia.playSound("fail.wav");
         }

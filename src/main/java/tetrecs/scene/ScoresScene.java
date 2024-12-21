@@ -231,7 +231,6 @@ public class ScoresScene extends BaseScene{
         BorderPane.setMargin(localScoresVBox, new Insets(30, 30, 30, 30));
         mainPane.setLeft(localScoresVBox);
 
-        /*
         // Online scores
         var onlineScoresList = new ScoresList(remoteScoresObservable);
 
@@ -248,8 +247,6 @@ public class ScoresScene extends BaseScene{
         onlineScoresVBox.setAlignment(Pos.BOTTOM_RIGHT);
         BorderPane.setMargin(onlineScoresVBox, new Insets(30, 30, 30, 30));
         mainPane.setRight(onlineScoresVBox);
-
-         */
     }
 
     /**
@@ -476,7 +473,7 @@ public class ScoresScene extends BaseScene{
         logger.info("Initialising Scores");
 
         loadScores();
-        //loadOnlineScores();
+        loadOnlineScores();
 
         scene.addEventHandler(KeyEvent.KEY_PRESSED, (key) -> {
             if (key.getCode() == KeyCode.ESCAPE) {
@@ -497,7 +494,6 @@ public class ScoresScene extends BaseScene{
             }
         }
 
-        /*
         // Write new score into online scores once
         for (Pair<String, Integer> pair : remoteScoresObservableProperty) {
             if (game.getScore() >= pair.getValue()) {
@@ -505,8 +501,6 @@ public class ScoresScene extends BaseScene{
                 break;
             }
         }
-
-         */
 
         // Remove outdated pair and replace with new pair in local scores
         if (flag) {

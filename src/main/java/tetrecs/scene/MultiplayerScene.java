@@ -151,6 +151,8 @@ public class MultiplayerScene extends ChallengeScene {
         scoreTitle.getStyleClass().add("lives");
         scoreVBox.getChildren().add(scoreTitle);
 
+        //TODO: Score isn't displayed
+
         // Current score
         var score = new Text("");
         score.getStyleClass().add("score");
@@ -374,7 +376,7 @@ public class MultiplayerScene extends ChallengeScene {
 
         Runnable runnable = () -> {
             communicator.send("SCORES");
-            communicator.send("BOARD");
+            //communicator.send("BOARD");
             communicator.send("SCORE " + game.getScore());
         };
 
