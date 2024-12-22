@@ -107,7 +107,7 @@ public class MultiplayerGame extends Game {
         super.gameOver();
         if (getLives() < 0) {
             logger.info("Game over");
-            //sendGameOver();
+            sendGameOver();
 
             setLives(0);
         }
@@ -233,6 +233,11 @@ public class MultiplayerGame extends Game {
     private void sendLives() {
         logger.info("Sending LIVES message");
         communicator.send("LIVES " + lives.get());
+    }
+
+    private void sendGameOver() {
+        logger.info("Sending DIE message");
+        communicator.send("DIE");
     }
 
     // Listeners

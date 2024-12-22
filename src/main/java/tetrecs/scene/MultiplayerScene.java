@@ -198,7 +198,6 @@ public class MultiplayerScene extends ChallengeScene {
 
         // Board and pieceboards
         // Pieceboards
-
         nextPieceBoard = new PieceBoard(3, 3, gameWindow.getWidth()/9.0, gameWindow.getWidth()/9.0);
         currentPieceBoard = new PieceBoard(3, 3, gameWindow.getWidth()/7.0, gameWindow.getWidth()/7.0);
 
@@ -562,7 +561,6 @@ public class MultiplayerScene extends ChallengeScene {
 
         }
         if (message.startsWith("SCORES")) {
-            logger.info("SCORES");
             String[] components = message.replace("SCORES ", "").split("\n");
 
             for (String parts : components) {
